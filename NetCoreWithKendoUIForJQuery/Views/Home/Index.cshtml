@@ -34,16 +34,44 @@
     ];
 
     var DataHelper = {
-        GenerateColumns: function () { 
+        GenerateColumns: function () {
             return columns = [
                 // The field matches the ID property in the data array.
-                { field: "ID", title: "Personal Id", width: "70px" },
+                { field: "ID", title: "Personal Id", width: "70px"},
                 { field: "Name", title: "First Name", width: "150px" },
-                { field: "Date", title: "Hire Date", width: "200px", format: "{0:dd-MM-yyyy}" }
+                { field: "HireDate", title: "Hire Date", width: "200px", format: "{0:dd-MM-yyyy}" }
             ];
         },
-        GridDataSource: function () { 
-            var gridDataSource = new kendo.data.DataSource
+        GridDataSource: function () {
+            var gridDataSource = new kendo.data.DataSource({
+                type: "json",
+                serverPaging: false,
+                serverSorting: false,
+                serverFiltering: false,
+                allowUnsort: true,
+                pageSize: 5,
+                
+                transport: {
+                    read: {
+                        url: '../Employee/GetAllEmployees',
+                        type: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8"
+                    },
+                    parameterMap: function (options) {
+                        return options;
+                    }
+                },
+                schema: {
+                    data: "Items", total: "TotalCount",
+                    model: {
+                        fields: {
+
+                        }
+                    },
+                },
+            });
+            return gridDataSource;
         }
     }
 
@@ -64,8 +92,6 @@
         $("#my-grid").kendoGrid({
             // width: "700px",
             // height: "400px",
-            // Add toolbar buttons for creating and saving buttons.
-            toolbar: ["create", "save"],
             // Enable the filtering functionality.
             filterable: true,
             // Enable the editing functionality (incell by default).
@@ -73,23 +99,25 @@
             // Enable the sorting functionality.
             sortable: true,
             // Enable the paging functionality.
-            pageable:true,
+            pageable: true,
+            editable: false,
             // The columns configuration is an array of objects.
             columns: DataHelper.GenerateColumns(),
-            dataSource: {
-                data: myDataArray,
-                pageSize: 5,
-                schema: {
-                    model: {
-                        id: "ID",
-                        fields: {
-                            ID: { type: "number", editable: false },
-                            Name: { type: "string", editable: false },
-                            Date: { type: "date", editable: false }
-                        }
-                    }
-                }
-            }
+            // dataSource: {
+            //     data: myDataArray,
+            //     pageSize: 5,
+            //     schema: {
+            //         model: {
+            //             id: "ID",
+            //             fields: {
+            //                 ID: { type: "number", editable: false },
+            //                 Name: { type: "string", editable: false },
+            //                 Date: { type: "date", editable: false }
+            //             }
+            //         }
+            //     }
+            // }
+            dataSource: DataHelper.GridDataSource()
         });
 
     });
