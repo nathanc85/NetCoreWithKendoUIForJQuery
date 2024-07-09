@@ -38,7 +38,7 @@
 
         $("#cmbEmployee").kendoComboBox({
             dataSource: [{ EmployeeID: 1, EmployeeName: "John" }, { EmployeeID: 2, EmployeeName: "Michael" }, { EmployeeID: 3, EmployeeName: "Lenna" }, { EmployeeID: 4, EmployeeName: "Ruona" }],
-            placeholder:"Select",
+            placeholder: "Select",
             dataTextField: "EmployeeName",
             dataValueField: "EmployeeID",
             index: 0,
@@ -48,14 +48,18 @@
 
         // Target the div element by using jQuery and then call the kendoGrid() method.
         $("#my-grid").kendoGrid({
-            width: "700px",
-            height: "400px",
-        // Add toolbar buttons for creating and saving buttons.
-        toolbar: ["create", "save"],
+            // width: "700px",
+            // height: "400px",
+            // Add toolbar buttons for creating and saving buttons.
+            toolbar: ["create", "save"],
             // Enable the filtering functionality.
             filterable: true,
             // Enable the editing functionality (incell by default).
             editable: true,
+            // Enable the sorting functionality.
+            sortable: true,
+            // Enable the paging functionality.
+            pageable:true,
             // The columns configuration is an array of objects.
             columns: [
                 // The field matches the ID property in the data array.
@@ -65,6 +69,7 @@
             ],
             dataSource: {
                 data: myDataArray,
+                pageSize: 5,
                 schema: {
                     model: {
                         id: "ID",
