@@ -6,3 +6,25 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="col-md-12">
+    <p> Kendo UI Version <strong id="kendoVersion"></strong></p>
+
+    <input id="cmbEmployee" />
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#kendoVersion").text(kendo.version);
+
+        $("#cmbEmployee").kendoComboBox({
+            dataSource: [{ EmployeeID: 1, EmployeeName: "John" }, { EmployeeID: 2, EmployeeName: "Michael" }, { EmployeeID: 3, EmployeeName: "Lenna" }, { EmployeeID: 4, EmployeeName: "Ruona" }],
+            placeholder:"Select",
+            dataTextField: "EmployeeName",
+            dataValueField: "EmployeeID",
+            index: 0,
+            suggest: true,
+            filter: "contains"
+        });
+    });
+</script>
