@@ -33,6 +33,20 @@
         { ID: 11, Name: "Rosmunda", Date: "08/15/2022" },
     ];
 
+    var DataHelper = {
+        GenerateColumns: function () { 
+            return columns = [
+                // The field matches the ID property in the data array.
+                { field: "ID", title: "Personal Id", width: "70px" },
+                { field: "Name", title: "First Name", width: "150px" },
+                { field: "Date", title: "Hire Date", width: "200px", format: "{0:dd-MM-yyyy}" }
+            ];
+        },
+        GridDataSource: function () { 
+            var gridDataSource = new kendo.data.DataSource
+        }
+    }
+
     $(document).ready(function () {
         $("#kendoVersion").text(kendo.version);
 
@@ -61,12 +75,7 @@
             // Enable the paging functionality.
             pageable:true,
             // The columns configuration is an array of objects.
-            columns: [
-                // The field matches the ID property in the data array.
-                { field: "ID", title: "Personal Id", width: "70px" },
-                { field: "Name", title: "First Name", width: "150px" },
-                { field: "Date", title: "Hire Date", width: "200px", format: "{0:dd-MM-yyyy}" }
-            ],
+            columns: DataHelper.GenerateColumns(),
             dataSource: {
                 data: myDataArray,
                 pageSize: 5,
