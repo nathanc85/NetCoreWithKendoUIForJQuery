@@ -10,7 +10,8 @@
 
 
 
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/8.0.1/default/default-main.css" />
+    @* <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/8.0.1/default/default-main.css" /> *@
+    <link href="~/lib/kendo/default-main.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 </head>
@@ -50,7 +51,9 @@
     
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://kendo.cdn.telerik.com/2024.2.514/js/kendo.all.min.js">
+    @* <script src="https://kendo.cdn.telerik.com/2024.2.514/js/kendo.all.min.js"> *@
+        
+    <script src="~/lib/kendo/kendo.all.min.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
